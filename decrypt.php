@@ -14,7 +14,7 @@
     // $cod = encipher($str, $key, true); 
     // printf("Code: %s\n", $cod);
 
-    $dec = encipher($str, $key, false); 
+    $dec = encipher($str, $key); 
     // printf("Back: %s\n", $dec);
     $result = $dec;
     // printf("ord:  %s\n", ord('B'));
@@ -24,7 +24,7 @@
 
  }
 
- function encipher($src, $key, $is_encode)
+ function encipher($src, $key)
     {
         $key = strtoupper($key);
         $src = strtoupper($src);
@@ -46,9 +46,8 @@
             $dest = substr_replace($dest,
                 chr (
                     ord('A') +
-                    ($is_encode
-                    ? ord($char) - ord('A') + ord($key[$i % strlen($key)]) - ord('A')
-                    : ord($char) - ord($key[$i % strlen($key)]) + 26
+                    (
+                    ord($char) - ord($key[$i % strlen($key)]) + 26
                     ) % 26
                 )
             , $i, 1);
